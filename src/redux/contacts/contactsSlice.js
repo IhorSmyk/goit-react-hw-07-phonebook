@@ -3,7 +3,7 @@ import { getContactsThunk } from 'redux/thunks/contactsThunk';
 
 const contactSlice = createSlice({
   name: 'contacts',
-  initialState: { items: [], isLoading: false, error: null },
+  initialState: { items: [], filter: '', isLoading: false, error: null },
   reducers: {
     addContact: {
       reducer(state, action) {
@@ -12,6 +12,9 @@ const contactSlice = createSlice({
       prepare(newContact) {
         return { payload: { ...newContact, id: nanoid() } };
       },
+    },
+    filterContacts(state, action) {
+      state.filter = action.payload;
     },
     deleteContact: (state, action) => {
       state.items = state.items.filter(el => el.id !== action.payload);
@@ -24,7 +27,7 @@ const contactSlice = createSlice({
       })
       .addCase(getContactsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = action.payload;
+        state.items = action.payload;
         state.error = null;
       })
       .addCase(getContactsThunk.rejected, (state, action) => {
@@ -34,5 +37,5 @@ const contactSlice = createSlice({
   },
 });
 
-export const { addContact, deleteContact } = contactSlice.actions;
+export const { addContact, filterContacts, deleteContact } = contactSlice.actions;
 export default contactSlice.reducer;

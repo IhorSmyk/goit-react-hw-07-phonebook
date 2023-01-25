@@ -6,8 +6,9 @@ import s from './ContactTable.module.css';
 
 const ContactTable = () => {
   const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filter.filter);
+  const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
+  console.log(contacts);
 
   useEffect(() => {
     dispatch(getContactsThunk());
@@ -19,7 +20,7 @@ const ContactTable = () => {
 
   return (
     <>
-      {contacts.length === 0 ? (
+      {filteredContacts.length === 0 ? (
         <p className={s.message}>There is no contact</p>
       ) : (
         <table className={s.contactListTable}>
