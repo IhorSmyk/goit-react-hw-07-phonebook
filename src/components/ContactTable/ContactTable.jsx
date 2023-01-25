@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contacts/contactsSlice';
+import { useEffect } from 'react';
+import { getContactsThunk } from 'redux/thunks/contactsThunk';
 import s from './ContactTable.module.css';
 
 const ContactTable = () => {
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filter.filter);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
 
   const filteredContacts = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter)
