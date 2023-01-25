@@ -8,7 +8,6 @@ const ContactTable = () => {
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
-  console.log(contacts);
 
   useEffect(() => {
     dispatch(getContactsThunk());
