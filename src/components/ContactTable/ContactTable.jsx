@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/contacts/contactsSlice';
 import { useEffect } from 'react';
-import { getContactsThunk } from 'redux/thunks/contactsThunk';
+import { deleteContactThunk, getContactsThunk } from 'redux/thunks/contactsThunk';
 import s from './ContactTable.module.css';
 
 const ContactTable = () => {
@@ -37,7 +36,7 @@ const ContactTable = () => {
                   <td>{name} </td>
                   <td>{number}</td>
                   <td>
-                    <button onClick={() => dispatch(deleteContact(id))}>
+                    <button onClick={() => dispatch(deleteContactThunk(id))}>
                       delete
                     </button>
                   </td>
