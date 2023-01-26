@@ -10,8 +10,3 @@ export const deleteContact = async id => (await contactsAPI.delete(id)).data;
 
 export const addContact = async contact =>
   (await contactsAPI.post('', contact)).data;
-
-// export const addContact = async contact => {
-//   const { data } = await contactsApi.post('', contact);
-//   return data;
-// };

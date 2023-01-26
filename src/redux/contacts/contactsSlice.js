@@ -49,7 +49,7 @@ const contactSlice = createSlice({
       })
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = [action.payload, ...state.items];
+        state.items = [].concat(action.payload, state.items);
         state.error = null;
       })
       .addCase(addContactThunk.rejected, (state, action) => {
