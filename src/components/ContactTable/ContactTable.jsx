@@ -1,20 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { deleteContactThunk, getContactsThunk } from 'redux/thunks/contactsThunk';
+import { selectFilteredContacts } from 'redux/contacts/selectors';
 import s from './ContactTable.module.css';
 
 const ContactTable = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  // const contacts = useSelector(state => state.contacts.items);
+  // const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getContactsThunk());
   }, [dispatch]);
 
-  const filteredContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter)
-  );
+  // const filteredContacts = contacts.filter(({ name }) =>
+  //   name.toLowerCase().includes(filter)
+  // );
+
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
     <>
